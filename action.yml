@@ -1,0 +1,5 @@
+name: 'discord-notification'
+description: 'sends a notification to discord'
+runs: 
+  using: node12
+  main: dist/index.js
