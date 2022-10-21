@@ -1,5 +1,9 @@
 name: 'discord-notification'
 description: 'sends a notification to discord'
+inputs:
+  url:
+    description: 'discord channel url'
+    required: true
 runs: 
   using: node12
   main: dist/index.js
