@@ -1,5 +1,4 @@
 const core = require('@actions/core')
-const github = require('@actions/github');
 const https = require('https')
 const url = require('url')
 
@@ -41,8 +40,14 @@ async function send(payload){
 }
 
 function getEventData(){
+    const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/')
     return {
-        content: `Event: ${github.context.eventName}\n User: ${github.context.repo.owner}\n Repository: ${github.context.repo.repo}\n Ref: ${process.env.GITHUB_REF_NAME ?? ''}`
+        content: `
+        Event: ${process.env.GITHUB_EVENT_NAME}\n
+        User: ${owner}\n
+        Repository: ${repo.repo}\n
+        Ref: ${process.env.GITHUB_REF_NAME ?? ''}
+        `
     }
 }
 
