@@ -42,10 +42,11 @@ async function send(payload){
 function getEventData(){
     const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/')
     return {
+        username:'Github notification action',
         content: `
-        Event: ${process.env.GITHUB_EVENT_NAME}\n
-        User: ${owner}\n
-        Repository: ${repo}\n
+        Event: ${process.env.GITHUB_EVENT_NAME}
+        User: ${owner}
+        Repository: ${repo}
         Ref: ${process.env.GITHUB_REF_NAME ?? ''}
         `
     }
