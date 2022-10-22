@@ -42,9 +42,10 @@ async function send(payload){
 
 function getEventData(){
     return {
-        content: `Event: ${github.context.eventName}\n User: ${github.context.repo.owner}\n Repository: ${github.context.repo.repo}`
+        content: `Event: ${github.context.eventName}\n User: ${github.context.repo.owner}\n Repository: ${github.context.repo.repo}\n Ref: ${github.context.ref}`
     }
 }
+
 async function main(){
   try{
     await send(getEventData())
