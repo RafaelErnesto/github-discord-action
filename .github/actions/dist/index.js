@@ -42,7 +42,7 @@ async function send(payload){
 
 function getEventData(){
     return {
-        content: ` Event: ${github.context.eventName}} \n Repository: ${github.context.repo} \n Event Url: ${github.context.apiUrl} \n Details: ${JSON.stringify(github.context.issue)}`
+        content: ` Event: ${github.context.eventName} \n Repository: ${JSON.stringify(github.context.repo)} \n Details: ${JSON.stringify(github.context.issue)}`
     }
 }
 async function main(){
