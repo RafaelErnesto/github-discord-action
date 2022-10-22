@@ -42,7 +42,7 @@ async function send(payload){
 
 function getEventData(){
     return {
-        content: `Event: ${github.context.eventName}\n User: ${github.context.repo.owner}\n Repository: ${github.context.repo.repo}\n Ref: ${github.context.ref}`
+        content: `Event: ${github.context.eventName}\n User: ${github.context.repo.owner}\n Repository: ${github.context.repo.repo}\n Ref: ${process.env.GITHUB_REF_NAME ?? ''}`
     }
 }
 
