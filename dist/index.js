@@ -1,10 +1,11 @@
 const core = require('@actions/core')
+const github = require('@actions/github');
 const https = require('https')
 const url = require('url')
 
 const discordUrl = core.getInput('url')
 
-async function run(){
+async function send(payload){
   return new Promise((resolve, reject) => {
       const url = new URL(discordUrl)
       const options = {
@@ -19,22 +20,11 @@ async function run(){
 
       const req = https.request(options, (res) => {
         if(res.statusCode >= 200 || res.statusCode <= 299){
-          resolve()
+          resolve("success")
         } else {
-          reject()
+          reject("error")
         }
-
-        const body = []
-        res.on('data', (chunk) => body.push(chunk))
-        res.on('end', () => {
-          const resString = Buffer.concat(body).toString()
-          resolve(resString)
-        })
       })
-
-      const payload = {
-        content: "hi"
-      }
 
       req.on('error', (err) => {
         reject(err)
@@ -50,15 +40,18 @@ async function run(){
   })
 }
 
+function getEventData(){
+    return {
+        content: ` Event: ${github.context.eventName}} \n Repository: ${github.context.repo} \n Event Url: ${github.context.apiUrl} \n Details: ${JSON.stringify(github.context.issue)}`
+    }
+}
 async function main(){
   try{
-    await run()
-    console.log('success')
+    await send(getEventData())
     core.setOutput();
   } catch(error){
-    console.log(error.message)
     core.setFailed(error.message)
   }
 }
 
-main().await
+main()
