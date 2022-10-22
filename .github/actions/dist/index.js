@@ -45,7 +45,7 @@ function getEventData(){
         content: `
         Event: ${process.env.GITHUB_EVENT_NAME}\n
         User: ${owner}\n
-        Repository: ${repo.repo}\n
+        Repository: ${repo}\n
         Ref: ${process.env.GITHUB_REF_NAME ?? ''}
         `
     }
