@@ -48,7 +48,7 @@ function getEventData(){
 async function main(){
   try{
     await send(getEventData())
-    core.setOutput();
+    core.setOutput("success");
   } catch(error){
     core.setFailed(error.message)
   }
